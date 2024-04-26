@@ -24,6 +24,9 @@ class NavBar extends Component {
             <NavLink to="/about" className="nav-link">
               About
             </NavLink>
+            <NavLink to="/labs" className="nav-link">
+              Labs
+            </NavLink>
             {!user && (
               <React.Fragment>
                 <NavLink className="nav-item nav-link" to="/login">

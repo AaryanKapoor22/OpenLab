@@ -1,0 +1,25 @@
+{
+  "name": "projectapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.2.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "chai": "^4.4.1",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^10.4.0",
+    "mongodb-memory-server": "^9.1.7"
+  }
+}
