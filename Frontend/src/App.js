@@ -13,7 +13,7 @@ import auth from "./services/authService";
 import Logout from "./components/logout";
 import RecipeDetails from "./components/recipeDetails";
 import Labs from "./components/labs";
-
+import LabManager from "./components/labManager";
 
 function App() {
   const [user, setUser] = useState("");
@@ -37,6 +37,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/labs" element={<Labs />} />
+          <Route path="/manager" element={<LabManager />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/products" element={<Products sortBy="name" />} />
           <Route path="/redirect" element={<Navigate to="/" />} />
