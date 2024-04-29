@@ -1,11 +1,36 @@
-import React from "react";
-    const LabManager = () => {
+import React, { useEffect, useState } from 'react';
+import { getLabManagerInfo } from "../services/labManagerInfo";
+
+const LabManager = () =>{
+
+  const [labManagerInfo, setLabManagerInfo] = useState([]);
+  const [toggle, setToggle] = useState(false)
+
+  useEffect(() => {
+    async function fetchData() {
+      const info = await getLabManagerInfo();
+      setLabManagerInfo(info);
+    }
+    // get the lab manger info (this is a dummy data for now)
+    fetchData();
+  }); 
+  
+  // this is for the edit button 
+  // https://dommagnifi.co/2020-12-03-toggle-state-with-react-hooks/ was used as a resource
+
+ const buttonToggler = () => {
+  setToggle(true);
+ }
+ const saveButtonToggle = () => {
+  setToggle(false);
+  // save function for when connected to back end can be inserted here? (not there yet)
+ }
       return (
         <div>
           <div className="container-fluid">
             <ul className="nav nav-pills justify-content-center" id="nav">
               <li className="nav-item">
-                <a className="nav-link" href="#" id="open">Lab Manager</a>
+                <h1>Lab Manager</h1>
               </li>
             </ul>
           </div>
@@ -18,41 +43,27 @@ import React from "react";
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>NUR330L</td>
-                <td>2023-12-05</td>
-                <td>Dr. Jane Smith</td>
-              </tr>
-              <tr>
-                <td>NUR301L</td>
-                <td>2023-12-05</td>
-                <td>Prof. Alan Brown</td>
-              </tr>
-              <tr>
-                <td>NUR332L</td>
-                <td>2023-12-05</td>
-                <td>Dr. Maya Patel</td>
-              </tr>
-              <tr>
-                <td>NUR333L</td>
-                <td>2023-12-05</td>
-                <td>Dr. Raj Singh</td>
-              </tr><tr>
-                <td>NUR334L</td>
-                <td>2023-12-05</td>
-                <td>Dr. Kevin Wong</td>
-              </tr>
-              <tr>
-                <td>NUR335L</td>
-                <td>2023-12-05</td>
-                <td>Prof. Sarah Lee</td>
-              </tr>
+            {/* Loop through the dummy data passed in */}
+            {labManagerInfo.map((lab, index) => (
+              <tr key={index}>
+                <td  contentEditable={toggle}>{lab.section}</td>
+                <td contentEditable={toggle}>{lab.date}</td>
+                <td contentEditable={toggle}>{lab.instructor}</td>
+            </tr>
+            ))}
             </tbody>
           </table>
           <div className="buttons-container">
-            <button type="button" id="editButton" className="btn btn-primary">Edit</button>
-            <button type="button" id="saveButton" className="btn btn-secondary" style={{display: 'none'}}>Save</button>
+          {!toggle ? (
+          <button type="button" className="btn btn-primary" onClick={buttonToggler}>Edit</button>
+        ) : (
+          <button type="button" className="btn btn-secondary" onClick={saveButtonToggle}>Save</button>
+        )}
+           
           </div>
         </div>
       );
 }
+
+
+export default LabManager;
