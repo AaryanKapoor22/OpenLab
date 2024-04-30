@@ -24,6 +24,9 @@ class NavBar extends Component {
             <NavLink to="/about" className="nav-link">
               About
             </NavLink>
+            <NavLink to="/absence" className="nav-link">
+              Absence Tracking
+            </NavLink>
             <NavLink to="/labs" className="nav-link">
               Labs
             </NavLink>
