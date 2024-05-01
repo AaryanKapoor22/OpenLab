@@ -12,8 +12,8 @@ export async function login(username, password) {
   console.log("username", username);
   console.log("password", password);
   const { data: jwt } = await http.post(apiEndpoint + "login", {
-    username,
-    password,
+    username: username,
+    password: password,
   });
   console.log(jwt);
   localStorage.setItem(tokenKey, jwt);
