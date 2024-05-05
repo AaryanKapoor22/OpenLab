@@ -15,6 +15,8 @@ import RecipeDetails from "./components/recipeDetails";
 import Labs from "./components/labs";
 import LabManager from "./components/labManager";
 import AbsenceTracker from "./components/absencetracking";
+import Dashboard from "./components/professor_dashboard"; 
+
 
 function App() {
   const [user, setUser] = useState("");
@@ -43,6 +45,7 @@ function App() {
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/products" element={<Products sortBy="name" />} />
           <Route path="/redirect" element={<Navigate to="/" />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
