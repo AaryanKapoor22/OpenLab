@@ -16,7 +16,7 @@ import Labs from "./components/labs";
 import LabManager from "./components/labManager";
 import AbsenceTracker from "./components/absencetracking";
 import Dashboard from "./components/professor_dashboard"; 
-
+import LabDashboard from "./components/labDashboard";
 
 function App() {
   const [user, setUser] = useState("");
@@ -46,6 +46,7 @@ function App() {
           <Route path="/products" element={<Products sortBy="name" />} />
           <Route path="/redirect" element={<Navigate to="/" />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/labProf" element={< LabDashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
