@@ -36,7 +36,10 @@ const Labs = () => {
   
     // If the user is not already registered, attempt to register them for the lab
     try {
-      await registerForLab(sessionId, userId);
+      await registerForLab(userId,sessionId);
+
+      console.log(userId);
+      console.log(sessionId);
       setRegisteredSessions(prevRegisteredSessions => [...prevRegisteredSessions, sessionId]);
       toast.success("You've successfully registered for the lab.");
     } catch (ex) {
