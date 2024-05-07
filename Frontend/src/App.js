@@ -16,8 +16,7 @@ import LabManager from "./components/labManager";
 import AbsenceTracker from "./components/absencetracking";
 import Dashboard from "./components/professor_dashboard";
 import ProtectedRoute from "./components/protectedRoute"; // Import ProtectedRoute
-import UserContext from './components/UserContext';
-
+import UserContext from "./components/UserContext";
 
 function App() {
   const [user, setUser] = useState("");
@@ -28,15 +27,14 @@ function App() {
   }, []);
 
   return (
-
     <UserContext.Provider value={user}>
       <div className="container">
         <BrowserRouter>
           <NavBar user={user} />
           <Routes>
-          <Route path="/login" element={<LoginForm onLogin={setUser} />} />
+            <Route path="/login" element={<LoginForm onLogin={setUser} />} />
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/" exact element={<Table />} />
+            <Route path="/" exact element={<RegisterForm />} />
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/logout" element={<Logout />} />
@@ -50,7 +48,6 @@ function App() {
         </BrowserRouter>
       </div>
     </UserContext.Provider>
-
   );
 }
 
