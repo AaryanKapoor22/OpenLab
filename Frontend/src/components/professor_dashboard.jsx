@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"
-import Absent from "./absenceTracking"
+import Absent from "./absencetracking"
 import Lab from "./labManager";
 
 

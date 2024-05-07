@@ -13,7 +13,7 @@ import auth from "./services/authService";
 import Logout from "./components/logout";
 import LabScheduling from "./components/labScheduling";
 import LabManager from "./components/labManager";
-import AbsenceTracker from "./components/absenceTracking";
+import AbsenceTracker from "./components/absencetracking";
 import Dashboard from "./components/professor_dashboard";
 import ProtectedRoute from "./components/protectedRoute"; // Import ProtectedRoute
 import UserContext from './components/UserContext';
