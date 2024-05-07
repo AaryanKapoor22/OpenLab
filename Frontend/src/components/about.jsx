@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div>
       <h1>About Page</h1>
-      <p>ADD OUR ABOUT US.</p>
+      <p>Authors- Matt Nova, Aaryan Kapoor, Kevin Rodriguez, Camryn Keller</p>
     </div>
   );
 };
