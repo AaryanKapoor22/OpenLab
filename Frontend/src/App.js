@@ -34,7 +34,7 @@ function App() {
         <BrowserRouter>
           <NavBar user={user} />
           <Routes>
-            <Route path="/login" element={<LoginForm />} />
+          <Route path="/login" element={<LoginForm onLogin={setUser} />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/" exact element={<Table />} />
             <Route path="/products/:id" element={<ProductDetails />} />

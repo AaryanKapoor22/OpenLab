@@ -5,6 +5,7 @@ class NavBar extends Component {
   render() {
     const { user } = this.props;
     console.log(user); // Add this line
+    console.log(user ? user.role : 'User is null');
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

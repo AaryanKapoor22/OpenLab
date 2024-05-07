@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import auth from "../services/authService";
 
-const LoginForm = () => {
+
+const LoginForm = ({ onLogin }) => {
   const navigate = useNavigate();
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm();
 
@@ -16,6 +17,9 @@ const LoginForm = () => {
       const user = auth.getCurrentUser();   // Get user details, assumed to be implemented
   
       console.log('Logged in user:', user); // Log the logged in user
+  
+      // Call the onLogin prop with the new user data
+      onLogin(user);
   
       // Print the user's role
       console.log(`User role: ${user ? user.role : 'No user logged in'}`);

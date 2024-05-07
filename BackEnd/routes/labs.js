@@ -3,6 +3,8 @@ var router = express.Router();
 let Lab = require('../models/labs');
 let User = require('../models/users');
 let Attendance = require('../models/attendance');
+const mongoose = require('mongoose'); // Make sure this line is at the top of your file
+
 
 // Retrieves all the labs
 router.get('/', async (req, res, next) => {
@@ -49,30 +51,21 @@ router.route('/:labId/registerLab/:studentId')
       const labId = req.params.labId;
       const studentId = req.params.studentId;
 
-      // checks if Attendance for the Lab exists
-      let attendancee = await Attendance.findOne({ labId });
-
-      if (!attendancee) {
-        // if not, create one 
-        attendancee = new Attendance({
-          labId: labId,
-          absenceList: []
-        });
-      }
-
-      // Check if the student is already registered for the lab
-      const isAlreadyRegistered = attendancee.absenceList.some(absence => absence.studentId.toString() === studentId);
-
-      if (isAlreadyRegistered) {
-        // If the student is already registered, return an error message
-        res.status(400).json({ message: 'You are already registered for this lab.' });
+      // Ensure the student exists and the ID is valid
+      const student = await User.findById(studentId);
+      if (!student) {
+        res.status(404).json({ message: 'Student not found' });
         return;
       }
 
-      // If the student is not already registered, register them for the lab
-      attendancee.absenceList.push({ status: 'absent', studentId });
+      // Register the student for the lab
+      const attendance = await Attendance.findOneAndUpdate(
+        { labId },
+        { $push: { absenceList: { status: 'absent', studentId: mongoose.Types.ObjectId(studentId) } } },
+        { new: true, upsert: true }
+      );
 
-      await attendancee.save();
+      console.log(attendance.toObject());
 
       res.json({ message: 'User registered for the lab successfully' });
     } catch (e) {
@@ -80,6 +73,7 @@ router.route('/:labId/registerLab/:studentId')
       res.status(500).send("Internal server error");
     }
   });
+
 
  
 
