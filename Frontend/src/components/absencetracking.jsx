@@ -6,29 +6,34 @@ function AbsenceTracking() {
   const [labs, setLabs] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/labs')
-      .then(response => response.json())
-      .then(data => setLabs(data));
-  }, []);
-
-  useEffect(() => {
-    if (labs.length > 0) {
-      Promise.all(labs.map(lab =>
-        fetch(`http://localhost:3000/attendance/${lab._id}`)
-          .then(response => response.json())
-      ))
-      .then(data => {
-        // Assume the server response includes the entire student list with status
-        setAttendance(data.map(section => ({
+    const fetchData = async () => {
+      const labsResponse = await fetch('http://localhost:3000/labs');
+      const labsData = await labsResponse.json();
+      setLabs(labsData);
+    
+      if (labsData.length > 0) {
+        const attendanceData = await Promise.all(labsData.map(async lab => {
+          const attendanceResponse = await fetch(`http://localhost:3000/attendance/${lab._id}`);
+          return attendanceResponse.json();
+        }));
+    
+        const attendance = attendanceData.map(section => ({
           ...section,
-          students: section.students.map(student => ({
-            ...student,
+          students: section.map(student => ({ // section is an array of students
+            firstName: student.studentId.firstName,
+            lastName: student.studentId.lastName,
+            status: student.status,
             toggled: student.status // Preserve original status
           }))
-        })));
-      });
-    }
-  }, [labs]);
+        }));
+    
+        setAttendance(attendance);
+        console.log(attendance); // Log the attendance object
+      }
+    };
+  
+    fetchData();
+  }, []);
 
   // Function to toggle student status
   const toggleStatus = (sectionIndex, studentIndex) => {
