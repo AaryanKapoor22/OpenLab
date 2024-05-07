@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* styles.css */
+.tableContainer {
+  overflow-x: auto; /* Enables horizontal scrolling */
+  width: 100%; /* Adjust based on your layout needs */
+  margin-bottom: 20px; /* Adds space between tables */
+}
+
+.table {
+  min-width: 600px; /* Minimum width ensures it maintains structure */
+  width: 100%; /* Ensures the table stretches to fill the container */
+  border-collapse: collapse; /* Improves appearance by removing space between borders */
+  background-color: #f8f8f8; /* Light grey background for the entire table */
+}
+
+.table th, .table td {
+  border: 1px solid #ddd; /* Adds a subtle border to each cell */
+  padding: 8px; /* Adds padding inside each cell for better readability */
+  text-align: left; /* Aligns text to the left */
+}
+
+.table th {
+  background-color: #e0e0e0; /* Slightly darker grey for header cells */
+  color: #333; /* Dark text color for contrast */
+}
+
+.detailsSummary {
+  cursor: pointer; /* Changes the cursor to indicate interactivity */
+  padding: 10px;
+  margin-top: 10px; /* Adds space between each details element */
+  background-color: #e0e0e0; /* Light grey background for the summary part */
+  border-radius: 5px; /* Rounds the corners */
+}

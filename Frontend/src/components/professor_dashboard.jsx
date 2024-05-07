@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"
-import Absent from "./absencetracking"
+import Absent from "./absenceTracking"
 import Lab from "./labManager";
 
 
@@ -16,7 +16,7 @@ const professorDashboard = () => {
     }
 
     const buttonLabManager = () => {
-      navigate("/labProf")
+      navigate("/labManager")
     }
 
     return (

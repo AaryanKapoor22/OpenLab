@@ -56,18 +56,28 @@ class Form extends Component {
     );
   }
 
-  renderSelect(name, label, options) {
+  renderSelect(name, label, items) {
     const { data, errors } = this.state;
-
+  
     return (
-      <Select
-        name={name}
-        value={data[name]}
-        label={label}
-        options={options}
-        onChange={this.handleChange}
-        error={errors[name]}
-      />
+      <div className="form-group">
+        <label htmlFor={name}>{label}</label>
+        <select 
+          id={name} 
+          name={name} 
+          className="form-control" 
+          value={data[name]} 
+          onChange={this.handleChange}
+        >
+          <option value=""/>
+          {items.map(item => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </select>
+        {errors[name] && <div className="alert alert-danger">{errors[name]}</div>}
+      </div>
     );
   }
 

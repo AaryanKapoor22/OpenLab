@@ -1,7 +1,7 @@
-import { useState, React, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "./table";
 import NavBar from "./components/navBar";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Products from "./components/products";
 import About from "./components/about";
 import NotFound from "./components/notFound";
@@ -11,45 +11,46 @@ import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import auth from "./services/authService";
 import Logout from "./components/logout";
-import RecipeDetails from "./components/recipeDetails";
-import Labs from "./components/labs";
+import LabScheduling from "./components/labScheduling";
 import LabManager from "./components/labManager";
-import AbsenceTracker from "./components/absencetracking";
-import Dashboard from "./components/professor_dashboard"; 
-import LabDashboard from "./components/labDashboard";
+import AbsenceTracker from "./components/absenceTracking";
+import Dashboard from "./components/professor_dashboard";
+import ProtectedRoute from "./components/protectedRoute"; // Import ProtectedRoute
+import UserContext from './components/UserContext';
+
 
 function App() {
   const [user, setUser] = useState("");
 
   useEffect(() => {
     const user = auth.getCurrentUser();
-    console.log(user);
     setUser(user);
   }, []);
 
   return (
-    <div className="container">
-      <BrowserRouter>
-        <NavBar user={user} />
-        <Routes>
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/" exact element={<Table />} />
-          <Route path="/recipes/:id" element={<RecipeDetails />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/labs" element={<Labs />} />
-          <Route path="/absence" element={<AbsenceTracker />} />
-          <Route path="/manager" element={<LabManager />} />
-          <Route path="/not-found" element={<NotFound />} />
-          <Route path="/products" element={<Products sortBy="name" />} />
-          <Route path="/redirect" element={<Navigate to="/" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/labProf" element={< LabDashboard />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+
+    <UserContext.Provider value={user}>
+      <div className="container">
+        <BrowserRouter>
+          <NavBar user={user} />
+          <Routes>
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/" exact element={<Table />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/logout" element={<Logout />} />
+            <ProtectedRoute path="/labs" element={<LabScheduling />} />
+            <ProtectedRoute path="/absence" element={<AbsenceTracker />} />
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="/products" element={<Products sortBy="name" />} />
+            <ProtectedRoute path="/dashboard" element={<Dashboard />} />
+            <ProtectedRoute path="/labManager" element={<LabManager />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </UserContext.Provider>
+
   );
 }
 

@@ -16,26 +16,27 @@ export async function login(username, password) {
     password: password,
   });
   console.log(jwt);
-  localStorage.setItem(tokenKey, jwt);
+  localStorage.setItem(tokenKey, JSON.stringify(jwt));  // Stringify the user object
+  console.log('Storing user data:', jwt);
 }
 
 export function loginWithJwt(jwt) {
   localStorage.setItem(tokenKey, jwt);
 }
 
-export async function logout() {
-  const respond = await http.get(apiEndpoint + "logout");
-  console.log(respond);
+export function logout() {
   localStorage.removeItem(tokenKey);
 }
 
-export function getCurrentUser() {
+function getCurrentUser() {
   try {
-    const jwt = localStorage.getItem(tokenKey);
-    return jwtDecode(jwt);
+    const jwt = localStorage.getItem(tokenKey);  // Get the token from local storage
+    if (!jwt) return null;  // If the token doesn't exist, return null
+    const user = JSON.parse(jwt);  // Parse the user object
+    console.log('Retrieved user data:', user);
+    return user;
   } catch (ex) {
-    console.log(ex);
-    return null;
+    return null;  // If an error occurs, return null
   }
 }
 

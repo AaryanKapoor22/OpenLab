@@ -1,92 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import { getLabManagerInfo } from "../services/labManagerInfo";
+import { getLabs, createLab, deleteLab, registerLab } from "../services/labManagerService";
+import TableHead from "./tableHead";
+import TableBody from "./tableBody";
+import LabAdderForm from "./CreateLabForm";
 
-const LabManager = () =>{
+const LabManager = () => {
+  const [sessions, setSessions] = useState([]);
+  const [error, setError] = useState("");
 
-  const [labManagerInfo, setLabManagerInfo] = useState([]);
-  const [toggle, setToggle] = useState(false)
-
-  async function fetchData() {
-    const info = await getLabManagerInfo();
-    setLabManagerInfo(info);
-  }
   useEffect(() => {
-   
-    // get the lab manger info (this is a dummy data for now)
-    fetchData();
-  }, []); 
-  
-  // this is for the edit button 
-  // https://dommagnifi.co/2020-12-03-toggle-state-with-react-hooks/ was used as a resource
+    fetchLabs();
+  }, []);
 
- const buttonToggler = () => {
-  setToggle(true);
- }
- const saveButtonToggle = () => {
-  setToggle(false);
-  // save function for when connected to back end can be inserted here? (not there yet)
- }
-
-
- // code for deleting lab 
-const handleDelete = (id) => {
-  const newLabs = labManagerInfo.filter(lab => lab.id !== id);
-  setLabManagerInfo(newLabs);
-  try {
-    // delete the lab (add auth later on)
-  } catch (ex) {
-    console.log("delete exception");
-    if (ex.respond && ex.respond.status === 404) {
-      alert("Lab has already been deleted !");
-      
+  const fetchLabs = async () => {
+    try {
+      const { data } = await getLabs();
+      console.log("Labs data:", data);  // Check the structure of 'data'
+      setSessions(data);
+    } catch (err) {
+      setError("Failed to fetch labs.");
+      console.error("Fetching labs failed:", err);
     }
-  }
-};
-      return (
-        <div>
-          <div className="container-fluid">
-            <ul className="nav nav-pills justify-content-center" id="nav">
-              <li className="nav-item">
-                <h1>Lab Manager</h1>
-              </li>
-            </ul>
-          </div>
-          <table className="table">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">Section</th>
-                <th scope="col">Date</th>
-                <th scope="col">Instructor</th>
-              </tr>
-            </thead>
-            <tbody>
-            {/* Loop through the dummy data passed in */}
-            {labManagerInfo.map((lab, index) => (
-              <tr key={index}>
-                <td  contentEditable={toggle}>{lab.section}</td>
-                <td contentEditable={toggle}>{lab.date}</td>
-                <td contentEditable={toggle}>{lab.instructor}</td>
-                <td>
-                  {/* Lab is deleted */}
-                <button className="btn btn-danger" onClick={() => handleDelete(lab.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-            ))}
-            </tbody>
-          </table>
-          <div className="buttons-container">
-          {!toggle ? (
-          <button type="button" className="btn btn-primary" onClick={buttonToggler}>Edit</button>
-        ) : (
-          <button type="button" className="btn btn-secondary" onClick={saveButtonToggle}>Save</button>
-        )}
-           
-          </div>
-        </div>
-      );
-}
+  };
 
+  const handleLabAdded = async (labData) => {
+    try {
+      await createLab(labData);
+      fetchLabs();
+    } catch (err) {
+      setError("Adding lab failed.");
+      console.error("Adding lab failed:", err);
+    }
+  };
+
+  const handleLabDelete = async (labId) => {
+    try {
+      await deleteLab(labId);
+      fetchLabs();
+    } catch (err) {
+      setError("Failed to delete lab.");
+      console.error("Deleting lab failed:", err);
+    }
+  };
+
+  const handleRegister = async (labId, studentId) => {
+    try {
+      await registerLab(labId, studentId);
+      fetchLabs();
+    } catch (err) {
+      setError("Failed to register student.");
+      console.error("Registering student failed:", err);
+    }
+  };
+
+  return (
+    <div className="container justify-content-center">
+      <h1>Lab Manager</h1>
+      {error && <div className="alert alert-danger">{error}</div>}
+      <LabAdderForm onLabAdded={handleLabAdded} />
+      <TableHead />
+
+      <TableBody
+        sessions={sessions}
+        onDelete={handleLabDelete}
+        onRegister={handleRegister}
+        setDisplay={true}
+        showDelete={true}
+      />
+    </div>
+  );
+};
 
 export default LabManager;

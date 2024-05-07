@@ -9,7 +9,8 @@ const TableHead = () => {
         <th style={{ padding: '10px' }}>Date</th>
         <th style={{ padding: '10px' }}>Time</th>
         <th style={{ padding: '10px' }}>Instructor</th>
-        <th style={{ padding: '10px' }}>Room</th>
+        <th style={{ padding: '10px' }}>Location</th>
+        <th style={{ padding: '10px' }}>Actions</th>
       </tr>
     </thead>
   );
