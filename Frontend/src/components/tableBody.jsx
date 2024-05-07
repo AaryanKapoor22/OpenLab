@@ -18,17 +18,19 @@ class TableBody extends Component {
 
   render() {
     const { sessions, onDelete, setDisplay, showDelete } = this.props;
-   return (
+    return (
       <tbody>
-        {sessions.map((session, index) => (
-          <tr key={index}>
-            <td style={{ padding: '10px' }}>{session.labName}</td>
-            <td style={{ padding: '10px' }}>{new Date(session.labDate).toLocaleDateString()}</td>
-            <td style={{ padding: '15px' }}>{new Date(session.labDate).toLocaleTimeString()}</td>
-            <td style={{ padding: '10px' }}>{session.instructor ? `${session.instructor.firstName} ${session.instructor.lastName}` : 'No Instructor'}</td>
-            <td style={{ padding: '10px' }}>{session.labLocation}</td>
-            <td style={{ padding: '10px' }}>
-              {setDisplay && (
+        {sessions.map((session, index) => {
+          console.log("Session data:", session);  // Log each session object
+          return (
+            <tr key={index}>
+              <td style={{ padding: '10px' }}>{session.labName}</td>
+              <td style={{ padding: '10px' }}>{new Date(session.labDate).toLocaleDateString()}</td>
+              <td style={{ padding: '15px' }}>{new Date(session.labDate).toLocaleTimeString()}</td>
+              <td style={{ padding: '10px' }}>{session.instructor ? `${session.instructor.firstName} ${session.instructor.lastName}` : 'No Instructor'}</td>
+              <td style={{ padding: '10px' }}>{session.labLocation}</td>
+              <td style={{ padding: '10px' }}>
+                {setDisplay && (
                   <React.Fragment>
                     {this.props.showRegister && (
                       <button
@@ -53,10 +55,11 @@ class TableBody extends Component {
                 )}
               </td>
             </tr>
-          ))}
-        </tbody>
-      );
-    }
+          );
+        })}
+      </tbody>
+    );
   }
+}
   
   export default TableBody;

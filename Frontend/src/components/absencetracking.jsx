@@ -19,7 +19,8 @@ function AbsenceTracking() {
     
         const attendance = attendanceData.map(section => ({
           ...section,
-          students: section.map(student => ({ // section is an array of students
+          students: section.map(student => ({
+            studentId: student.studentId._id, // Assuming studentId is an object with _id property
             firstName: student.studentId.firstName,
             lastName: student.studentId.lastName,
             status: student.status,
