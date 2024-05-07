@@ -2,6 +2,9 @@ import axios from "axios";
 import logger from "./logService";
 import { toast } from "react-toastify";
 
+// Sets the base URL for all Axios requests too backend server
+axios.defaults.baseURL = "http://localhost:3000/";
+
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
     error.response &&
@@ -10,7 +13,7 @@ axios.interceptors.response.use(null, (error) => {
 
   if (!expectedError) {
     logger.log(error);
-    toast.error("An unexpected error occurrred.");
+    toast.error("An unexpected error occurred.");
   }
 
   return Promise.reject(error);

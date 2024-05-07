@@ -16,7 +16,7 @@ const professorDashboard = () => {
     }
 
     const buttonLabManager = () => {
-      navigate("/labProf")
+      navigate("/labManager")
     }
 
     return (

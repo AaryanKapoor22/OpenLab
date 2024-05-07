@@ -9,6 +9,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var labsRouter =  require('./routes/labs');
 var attendanceRouter =  require('./routes/attendance');
+var cors = require('cors');
+require('dotenv').config();
+
+
 // var labHubRouter = require('./routes/labhub');
 
 let uri = `mongodb+srv://${config.database.username}:${config.database.password}@${config.database.host}`;
@@ -35,8 +39,9 @@ let uri = `mongodb+srv://${config.database.username}:${config.database.password}
     console.log("DB connection error", e);
   }
 })();
-
 var app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

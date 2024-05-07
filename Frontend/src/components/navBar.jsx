@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+
 class NavBar extends Component {
   render() {
     const { user } = this.props;
+    console.log(user); // Add this line
+    console.log(user ? user.role : 'User is null');
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <NavLink className="navbar-brand" to="/">
@@ -21,15 +25,35 @@ class NavBar extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="navbar-nav">
-            <NavLink to="/about" className="nav-link">
-              About
-            </NavLink>
-            <NavLink to="/absence" className="nav-link">
-              Absence Tracking
-            </NavLink>
-            <NavLink to="/labs" className="nav-link">
-              Labs
-            </NavLink>
+            {user && user.role === 'student' && (
+              <React.Fragment>
+                <NavLink to="/about" className="nav-link">
+                  About
+                </NavLink>
+                <NavLink to="/labs" className="nav-link">
+                  Lab Scheduling
+                </NavLink>
+                <NavLink className="nav-item nav-link" to="/logout">
+                  Logout
+                </NavLink>
+              </React.Fragment>
+            )}
+            {user && user.role === 'admin' && (
+              <React.Fragment>
+                <NavLink to="/about" className="nav-link">
+                  About
+                </NavLink>
+                <NavLink to="/absence" className="nav-link">
+                  Absence Tracking
+                </NavLink>
+                <NavLink to="/labmanager" className="nav-link">
+                  Lab Manager
+                </NavLink>
+                <NavLink className="nav-item nav-link" to="/logout">
+                  Logout
+                </NavLink>
+              </React.Fragment>
+            )}
             {!user && (
               <React.Fragment>
                 <NavLink className="nav-item nav-link" to="/login">
@@ -40,20 +64,10 @@ class NavBar extends Component {
                 </NavLink>
               </React.Fragment>
             )}
-            {user && (
-              <React.Fragment>
-                <NavLink className="nav-item nav-link" to="/profile">
-                  {user.name}
-                </NavLink>
-                <NavLink className="nav-item nav-link" to="/logout">
-                  Logout
-                </NavLink>
-              </React.Fragment>
-            )}
           </div>
           {user && (
             <span className="navbar-text">
-              Welcome {`${user._doc.firstname} ${user._doc.lastname}`}
+              Welcome {`${user.firstName || ''} ${user.lastName || ''}`}
             </span>
           )}
         </div>

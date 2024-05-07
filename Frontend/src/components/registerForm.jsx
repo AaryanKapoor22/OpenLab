@@ -12,7 +12,7 @@ class RegisterForm extends Form {
 
   schema = {
     username: Joi.string().required().label("Username"),
-    password: Joi.string().required().min(5).label("Password"),
+    password: Joi.string().required().min(6).label("Password"),
     firstname: Joi.string().required().label("Firstname"),
     lastname: Joi.string().required().label("Lastname"),
   };
@@ -21,7 +21,7 @@ class RegisterForm extends Form {
     try {
       const response = await userService.register(this.state.data);
       auth.loginWithJwt(response.headers["x-access-token"]);
-      window.location = "/";
+      window.location = "/login";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
