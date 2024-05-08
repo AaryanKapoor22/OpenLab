@@ -1,5 +1,6 @@
 import React from "react";
 // This is the sample code from lesson videos. There's nothing fancy here.
+// Name: Kevin, Matt, Aaryan, Camryn
 // Adds headers to the table
 const TableHead = () => {
   return (

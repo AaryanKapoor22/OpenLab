@@ -1,3 +1,7 @@
+/* 
+Name: Kevin, Matt, Aaryan, Camryn
+LoginForm: displays a form for users to log in (STUDENTS AND ADMINS) - from sample code
+*/
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
@@ -40,6 +44,7 @@ const LoginForm = ({ onLogin }) => {
     }
   };
 
+  // display the login form
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,7 +55,7 @@ const LoginForm = ({ onLogin }) => {
             type="text"
             name="username"
             className="form-control"
-            id="username"  // Fixed typo in id
+            id="username"  
             aria-describedby="usernameHelp"
           />
           {errors.username && <div className="alert alert-danger">{errors.username.message}</div>}

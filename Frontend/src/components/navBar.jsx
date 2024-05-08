@@ -1,12 +1,18 @@
+/* 
+Name: Kevin, Matt, Aaryan, Camryn
+Simple nav bar - From sample code
+*/ 
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
+    // get the user's name
     const { user } = this.props;
-    console.log(user); // Add this line
+    console.log(user); 
     console.log(user ? user.role : 'User is null');
 
+    // display certain components based on user role
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <NavLink className="navbar-brand" to="/">

@@ -1,3 +1,7 @@
+/* 
+Name: Kevin, Matt, Aaryan, Camryn
+register form that allows users to register - from sample code 
+*/
 import React from "react";
 import Joi from "joi-browser";
 import Form from "../common/form";
@@ -5,11 +9,13 @@ import * as userService from "../services/userService";
 import auth from "../services/authService";
 
 class RegisterForm extends Form {
+  // set up state for the form
   state = {
     data: { username: "", password: "", firstname: "", lastname: "" },
     errors: {},
   };
 
+  // schema for the form 
   schema = {
     username: Joi.string().required().label("Username"),
     password: Joi.string().required().min(6).label("Password"),
@@ -17,6 +23,7 @@ class RegisterForm extends Form {
     lastname: Joi.string().required().label("Lastname"),
   };
 
+  // reguster the useralong with passing in the token
   doSubmit = async () => {
     try {
       const response = await userService.register(this.state.data);
@@ -31,6 +38,7 @@ class RegisterForm extends Form {
     }
   };
 
+  // render the form based on components
   render() {
     return (
       <div>

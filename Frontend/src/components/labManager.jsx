@@ -1,3 +1,7 @@
+/* 
+Name: Kevin, Matt, Aaryan, Camryn
+LabManager: responsible for managing labs, including adding, deleting, and registering students for labs (ADMIN ONLY)
+*/
 import React, { useEffect, useState } from 'react';
 import { getLabs, createLab, deleteLab, registerLab } from "../services/labManagerService";
 import TableHead from "./tableHead";
@@ -5,6 +9,7 @@ import TableBody from "./tableBody";
 import LabAdderForm from "./CreateLabForm";
 
 const LabManager = () => {
+  // states that store lab data and error messages
   const [sessions, setSessions] = useState([]);
   const [error, setError] = useState("");
 
@@ -12,10 +17,11 @@ const LabManager = () => {
     fetchLabs();
   }, []);
 
+  // get the labs from the backend
   const fetchLabs = async () => {
     try {
       const { data } = await getLabs();
-      console.log("Labs data:", data);  // Check the structure of 'data'
+      console.log("Labs data:", data);  
       setSessions(data);
     } catch (err) {
       setError("Failed to fetch labs.");
@@ -23,6 +29,7 @@ const LabManager = () => {
     }
   };
 
+  // add a new lab
   const handleLabAdded = async (labData) => {
     try {
       await createLab(labData);
@@ -33,6 +40,7 @@ const LabManager = () => {
     }
   };
 
+  // delete a lab
   const handleLabDelete = async (labId) => {
     try {
       await deleteLab(labId);
@@ -43,6 +51,7 @@ const LabManager = () => {
     }
   };
 
+  // register a student for a lab
   const handleRegister = async (labId, studentId) => {
     try {
       await registerLab(labId, studentId);
@@ -53,6 +62,7 @@ const LabManager = () => {
     }
   };
 
+  // render the lab manager page
   return (
     <div className="container justify-content-center">
       <h1>Lab Manager</h1>

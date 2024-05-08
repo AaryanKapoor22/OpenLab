@@ -1,3 +1,7 @@
+/*
+Name: Kevin, Matt, Aaryan, Camryn
+LabScheduling: displays missed and open labs to students and allowing them to register for labs
+*/
 import React, { useEffect, useState, useContext } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,10 +15,12 @@ import {
 } from "../services/LabSchedulingService";
 
 const Labs = () => {
+  // states that store active tab and lab data
   const [activeTab, setActiveTab] = useState("missed");
   const [sessions, setSessions] = useState([]);
   const { registeredSessions, setRegisteredSessions } = useContext(LabContext);
 
+  // display labs based on whether user wants to see missed or open labs
   useEffect(() => {
     const fetchData = async () => {
       let data;
@@ -55,10 +61,12 @@ const Labs = () => {
     }
   };
 
+  // labs entered
   const isLabRegistered = (labId) => {
     return registeredSessions.includes(labId);
   };
 
+  // display missed and open labs
   return (
     <div className="container-fluid">
       <ul

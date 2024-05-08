@@ -1,8 +1,9 @@
+/* 
+Name: Kevin, Matt, Aaryan, Camryn
+Dashboard that allows admin to navigate to either abscence or labManager page
+*/
 import React from "react";
 import { useNavigate } from "react-router-dom"
-import Absent from "./absencetracking"
-import Lab from "./labManager";
-
 
 
 const professorDashboard = () => {

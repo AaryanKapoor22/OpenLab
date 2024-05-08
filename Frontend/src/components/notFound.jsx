@@ -1,3 +1,4 @@
+// not found component - nothing special - From sample code
 import React from "react";
 
 const NotFound = () => {

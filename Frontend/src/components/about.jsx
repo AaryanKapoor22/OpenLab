@@ -1,3 +1,7 @@
+/* 
+Name: Kevin, Matt, Aaryan, Camryn
+About: displays information about the authors of the website - nothing fancy
+*/
 import React from "react";
 
 const About = () => {
