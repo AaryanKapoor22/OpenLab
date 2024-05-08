@@ -1,3 +1,5 @@
+// Name: Aaryan, Kevin, Matt, and Camryn
+// app file that is responsible for the execution of our implemented backend
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -31,6 +33,7 @@ let uri = `mongodb+srv://${config.database.username}:${config.database.password}
 //   }
 // })();
 
+// Connect to mongodb based on configurations
 (async function connectToMongoDB() {
   try {
     await mongoose.connect(uri);
@@ -53,6 +56,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/labs', labsRouter);

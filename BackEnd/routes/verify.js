@@ -1,6 +1,8 @@
+// Name: Aaryan, Kevin, Matt, and Camryn 
+// modified version of verify file from sample code given.
 var jwt = require("jsonwebtoken");
-var config = require("../config.js"); // Ensure this path correctly points to your config file
-var User = require("../models/users"); // Ensure this path correctly points to your User model
+var config = require("../config.js"); 
+var User = require("../models/users"); 
 
 // Function to generate a token
 exports.getToken = function (user) {

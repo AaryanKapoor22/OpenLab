@@ -1,3 +1,5 @@
+// Name: Aaryan, Kevin, Matt, and Camryn
+// NOTE: THIS ROUTE FILE WILL NOT BE USED IN THE FINAL VERSION OF THE PROJECT - ALL ROUTES WERE MOVED TO THEIR RESPECTIVE FILES
 // required imports for router 
 var express = require('express');
 let Attendance = require('../models/attendance');

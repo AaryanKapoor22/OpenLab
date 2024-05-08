@@ -1,4 +1,5 @@
 /* 
+Name: Kevin, Aaryan, Matt, and Camryn
 Config file to help set up the uri link to connect to db 
 Note: practice code from lesson 10/11 were useful for the creation of the file. 
 */
