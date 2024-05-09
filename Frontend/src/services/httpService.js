@@ -4,7 +4,7 @@ import logger from "./logService";
 import { toast } from "react-toastify";
 
 // Sets the base URL for all Axios requests too backend server
-axios.defaults.baseURL = "http://localhost:3000/";
+axios.defaults.baseURL = "https://backend-openlab.vercel.app";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
