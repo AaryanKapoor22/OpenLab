@@ -35,6 +35,11 @@ npm start
 ```
 The frontend should now be running and accessible through http://localhost:3001, and the backend will be servicing requests from the frontend.
 
+### HOSTED ONLINE!
+
+You can now access the open lab scheduler online hosted here!
+https://open-lab-scheduling.vercel.app/
+
 ### License
 
 This project is licensed under the MIT License - see the LICENSE file in the repository for details.
